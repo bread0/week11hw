@@ -3,51 +3,51 @@
 
 // typing words 2
 
-// see previous sketch for instructions.
-
+String letters = "";
 ArrayList<Word> words = new ArrayList<Word>();
+Word w;
 
 void setup() {
   size(600, 600);
+  w = new Word(50, 50, "hello!");
+  textSize(16);
+  textAlign(CENTER);
 }
 
 void draw() {
   background(100);
-  for (int i = 0; i < words.size(); i++) {
-    Word temp = words.get(i);
+  w.display();
+  text(letters, 0, 50, 600, 1000);
+  for (Word temp : words) {
     temp.display();
   }
-  //words.display();
 }
 
 void keyPressed() {
-  //if ((key == ENTER) || (key == RETURN)) {
-  //  println(letters);
-  //  letters = "";
-  //} else if ((key > 31) && (key != CODED)) {
-  //  letters = letters + key;
-  //}
+  if ((key == ENTER) || (key == RETURN)) {
+    Word w = new Word(random(width), random(height), letters);
+    words.add(w);
+    letters = "";
+    for (Word temp : words) {
+      println(temp.theWord);
+    }
+  } else if ((key > 31) && (key != CODED)) {
+    letters = letters + key;
+  }
 }
 
 class Word {
-  //String theWord;
-  String letters = "";
+  String theWord;
   float x, y;
 
-  Word() {
-    //theWord = text + key;
-    textSize(16);
-    textAlign(CENTER);
+  Word(float x, float y, String text) {
+    theWord = text;
+    this.x = x;
+    this.y = y;
   }
 
   void display() {
-    //  text(theWord, x, y);
-    //}
-    if ((key == ENTER) || (key == RETURN)) {
-      println(letters);
-      letters = "";
-    } else if ((key > 31) && (key != CODED)) {
-      letters = letters + key;
-    }
+    fill(255);
+    text(theWord, x, y);
   }
 }
